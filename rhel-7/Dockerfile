@@ -1,4 +1,4 @@
-FROM 	172.30.131.217:5000/p64678272871a81b63f3a415e5d692cd15a73c5dbd/partner-build-service:testbuild03 
+FROM 	partner-build-service:testbuild03 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 RUN yum install -y curl ca-certificates sudo procps-ng libaio-devel && \
