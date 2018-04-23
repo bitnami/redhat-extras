@@ -1,4 +1,5 @@
-FROM 	partner-build-service:testbuild03 
+FROM registry.access.redhat.com/rhel7
+
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 RUN yum install --disablerepo=rhel-7-server-htb-rpms -y gcc-c++ pkgconfig unzip git
