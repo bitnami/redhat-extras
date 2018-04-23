@@ -36,26 +36,11 @@ print_usage() {
 }
 
 identify_distro() {
-  distro="unknown"
-  if [ -f /etc/os-release ]; then
-    distro="$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)-$(grep "^VERSION_ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)"
-  fi
-  echo "$distro"
+  echo "debian-8"
 }
 
 identify_arch() {
-  case $(arch) in
-  x86_64)
-    arch=x64
-    ;;
-  ppc64le)
-    arch=ppc64le
-    ;;
-  *)
-   arch="unknown"
-   ;;
-  esac
-  echo $arch
+  echo "x64"
 }
 
 # break up command line for easy parsing and check legal options
@@ -112,8 +97,8 @@ fi
 INSTALL_ROOT=/tmp/bitnami/pkg/install
 CACHE_ROOT=/tmp/bitnami/pkg/cache
 
-PACKAGE="$2-linux-$(identify_arch)-$(identify_distro)"
-PACKAGE_ARGS=${@:3}
+PACKAGE="$2-$3"
+PACKAGE_ARGS=${@:4}
 PACKAGE_NAME=$(echo $PACKAGE | sed 's/-[0-9].*//')
 RELEASE_BUCKET=${RELEASE_BUCKET:-stacksmith}
 
