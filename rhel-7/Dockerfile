@@ -1,6 +1,7 @@
 FROM 	partner-build-service:testbuild03 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+RUN yum install --disablerepo=rhel-7-server-htb-rpms -y gcc-c++ pkgconfig unzip git
 RUN yum install -y curl ca-certificates sudo procps-ng libaio-devel && \
   useradd -ms /bin/bash bitnami && \
   mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
