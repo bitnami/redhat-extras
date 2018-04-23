@@ -1,11 +1,13 @@
-FROM registry.access.redhat.com/rhel7
+FROM 	172.30.131.217:5000/p64678272871a81b63f3a415e5d692cd15a73c5dbd/partner-build-service:testbuild03 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-RUN yum install -y curl ca-certificates sudo locales procps libaio1 && \
+RUN yum install -y curl ca-certificates sudo procps-ng libaio-devel && \
   useradd -ms /bin/bash bitnami && \
   mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
   sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
   echo "bitnami ALL=NOPASSWD: ALL" >> /etc/sudoers
+
+RUN yum install --disablerepo=rhel-7-server-htb-rpms -y wget apr apr-util bzip2-libs glibc libcom_err libcurl expat libffi freetype libgcc libgcrypt gmp gnutls libgpg-error cyrus-sasl-gssapi libicu libidn libjpeg-turbo krb5-libs keyutils-libs openldap xz-libs libtomcrypt ncurses-libs nettle p11-kit pcre2 libpng12 readline cyrus-sasl-lib libssh2 openssl-libs libstdc++ libtasn1 libuuid libxml2 libxslt zlib
 
 # The following security actions are recommended by some security scans.
 # https://console.bluemix.net/docs/services/va/va_index.html
