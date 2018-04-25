@@ -1,0 +1,3 @@
+Bitnami containers ship with bundle softwares you can find the licenses under:
+/opt/bitnami/nami/COPYING
+/opt/bitnami/[name-of-bundle]/licenses/[bundle-version].txt
