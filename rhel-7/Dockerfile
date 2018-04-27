@@ -2,14 +2,12 @@ FROM registry.access.redhat.com/rhel7
 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-RUN yum install --disablerepo=rhel-7-server-htb-rpms -y gcc-c++ pkgconfig unzip git
-RUN yum install --disablerepo=rhel-7-server-htb-rpms -y curl ca-certificates sudo procps-ng libaio-devel && \
+RUN yum install -y gcc-c++ pkgconfig unzip git  
+RUN yum install -y curl ca-certificates sudo procps-ng libaio-devel && \
   useradd -ms /bin/bash bitnami && \
   mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
   sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
   echo "bitnami ALL=NOPASSWD: ALL" >> /etc/sudoers
-
-RUN yum install --disablerepo=rhel-7-server-htb-rpms -y wget apr apr-util bzip2-libs glibc libcom_err libcurl expat libffi freetype libgcc libgcrypt gmp gnutls libgpg-error cyrus-sasl-gssapi libicu libidn libjpeg-turbo krb5-libs keyutils-libs openldap xz-libs libtomcrypt ncurses-libs nettle p11-kit pcre2 libpng12 readline cyrus-sasl-lib libssh2 openssl-libs libstdc++ libtasn1 libuuid libxml2 libxslt zlib
 
 # The following security actions are recommended by some security scans.
 # https://console.bluemix.net/docs/services/va/va_index.html
@@ -48,7 +46,7 @@ RUN cd /tmp && \
   chmod +x /usr/local/bin/gosu && \
   rm gosu.asc
 
-RUN mkdir /licenses && echo "Test license" > /licenses/test
+RUN mkdir /licenses
 
 
 ENV PATH=/opt/bitnami/nami/bin:$PATH
