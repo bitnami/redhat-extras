@@ -2,8 +2,7 @@ FROM registry.access.redhat.com/rhel7
 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-RUN yum install -y gcc-c++ pkgconfig unzip git  
-RUN yum install -y curl ca-certificates sudo procps-ng libaio-devel && \
+RUN yum install --disablerepo=rhel-7-server-htb-rpms -y gcc-c++ pkgconfig unzip git curl ca-certificates sudo procps-ng libaio-devel && \
   useradd -ms /bin/bash bitnami && \
   mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
   sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
