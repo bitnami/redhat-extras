@@ -46,9 +46,6 @@ RUN cd /tmp && \
   chmod +x /usr/local/bin/gosu && \
   rm gosu.asc
 
-RUN mkdir /licenses
-
-
 ENV PATH=/opt/bitnami/nami/bin:$PATH
 ENV BITNAMI_IMAGE_VERSION=rhel-atomic-7.5
 
