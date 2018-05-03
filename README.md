@@ -1,30 +1,17 @@
-[![CircleCI](https://circleci.com/gh/bitnami/minideb-extras/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/minideb-extras/tree/master)
-[![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/minideb-extras)](https://hub.docker.com/r/bitnami/minideb-extras/)
 
-# `bitnami/minideb-extras`
+# `bitnami/redhat-extras`
 
 ## TL;DR
 
 ```dockerfile
-FROM bitnami/minideb-extras:jessie
+FROM bitnami/redhat-extras:jessie
 ```
 
 ## About
 
-The `bitnami/minideb-extras` image is a customized base image for use in Bitnami container images and is built on top of the light-weight and Debian-based `bitnami/minideb` image. Learn more about [bitnami/minideb](https://github.com/bitnami/minideb) in [Minideb: A New Container Base Image](https://engineering.bitnami.com/2016/11/02/minideb-a-new-container-base-image.html).
+The `bitnami/redhat-extras` image is a customized base image for use in Bitnami container images and is built on top of the Red Hat Enterprise Linux image. 
 
 The `Dockerfile` installs [Nami](https://github.com/bitnami/nami) and includes a `bitnami-pkg` helper script to simplify downloading of Nami modules from the Bitnami package repositories. Additionally the `Dockerfile` installs [tini](https://github.com/krallin/tini)  and is used in the default [entrypoint](../../blob/master/rootfs/entrypoint.sh).
-
-## Variants
-
-The image is available in the following variants:
-
-|                  Image                   |                    Configuration                    |
-|------------------------------------------|-----------------------------------------------------|
-| bitnami/minideb-extras:jessie            | Standard                                            |
-| bitnami/minideb-extras:stretch           | Standard                                            |
-| bitnami/minideb-extras:jessie-buildpack  | Buildpack (includes `build-essential`, `git`, etc.) |
-| bitnami/minideb-extras:stretch-buildpack | Buildpack (includes `build-essential`, `git`, etc.) |
 
 ## Usage
 
@@ -33,11 +20,13 @@ Use like a regular base image.
 The following example uses the `install_packages` helper script, provided by `minideb`, to install APT packages from the Debian repositories. The `bitnami-pkg` tool to install `nami` packages published by Bitnami.
 
 ```dockerfile
-FROM bitnami/minideb-extras:jessie
+FROM bitnami/redhat-extras:jessie
 ENV BITNAMI_APP_NAME=apache
-RUN install_packages libssl1.0.0 libaprutil1 libapr1 libc6 libuuid1 libexpat1 \
-      libpcre3 libldap-2.4-2 libsasl2-2 libgnutls-deb0-28 zlib1g libp11-kit0 \
-      libtasn1-6 libnettle4 libhogweed2 libgmp10 libffi6
+RUN install_packages wget apr apr-util bzip2-libs glibc libcom_err libcurl expat libffi \ 
+    freetype libgcc libgcrypt gmp gnutls libgpg-error cyrus-sasl-gssapi libicu libidn \
+    libjpeg-turbo krb5-libs keyutils-libs openldap xz-libs libtomcrypt ncurses-libs \
+    nettle p11-kit pcre2 libpng libpng12 readline cyrus-sasl-lib libssh2 openssl-libs \
+    libstdc++ libtasn1 libuuid libxml2 libxslt zlib
 RUN bitnami-pkg install apache-2.4.25-0
 CMD ["nami", "start", "--foreground", "apache"]
 ```
