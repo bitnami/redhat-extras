@@ -4,7 +4,7 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY rootfs /
 
-RUN install_packages gcc-c++ pkgconfig unzip git curl ca-certificates sudo procps-ng libaio-devel && \
+RUN install_packages --disablerepo=rhel-7-server-htb-rpms gcc-c++ pkgconfig unzip git curl ca-certificates sudo procps-ng libaio-devel && \
     useradd -ms /bin/bash bitnami && \
     mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
     sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
