@@ -4,7 +4,7 @@
 ## TL;DR
 
 ```dockerfile
-FROM bitnami/redhat-extras:jessie
+FROM bitnami/redhat-extras
 ```
 
 ## About
