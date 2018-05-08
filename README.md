@@ -1,4 +1,3 @@
-
 # `bitnami/redhat-extras`
 
 ## TL;DR
@@ -17,17 +16,14 @@ The `Dockerfile` installs [Nami](https://github.com/bitnami/nami) and includes a
 
 Use like a regular base image.
 
-The following example uses the `install_packages` helper script, provided by `minideb`, to install APT packages from the Debian repositories. The `bitnami-pkg` tool to install `nami` packages published by Bitnami.
+The following example uses the `install_packages` helper script to install packages from the RedHat repositories using `yum`. The `bitnami-pkg` tool to install `nami` packages published by Bitnami.
 
 ```dockerfile
-FROM bitnami/redhat-extras:jessie
+FROM bitnami/redhat-extras:7
 ENV BITNAMI_APP_NAME=apache
-RUN install_packages wget apr apr-util bzip2-libs glibc libcom_err libcurl expat libffi \ 
-    freetype libgcc libgcrypt gmp gnutls libgpg-error cyrus-sasl-gssapi libicu libidn \
-    libjpeg-turbo krb5-libs keyutils-libs openldap xz-libs libtomcrypt ncurses-libs \
-    nettle p11-kit pcre2 libpng libpng12 readline cyrus-sasl-lib libssh2 openssl-libs \
-    libstdc++ libtasn1 libuuid libxml2 libxslt zlib
-RUN bitnami-pkg install apache-2.4.25-0
+RUN install_packages wget apr apr-util bzip2-libs glibc \
+    libcom_err libcurl expat libffi
+RUN bitnami-pkg install apache-2.4.33-0
 CMD ["nami", "start", "--foreground", "apache"]
 ```
 

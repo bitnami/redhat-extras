@@ -2,6 +2,8 @@ FROM registry.access.redhat.com/rhel7
 
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+ENV IMAGE_OS rhel-7
+
 COPY rootfs /
 
 RUN install_packages gcc-c++ pkgconfig unzip git curl ca-certificates sudo procps-ng libaio-devel && \
@@ -48,6 +50,6 @@ RUN cd /tmp && \
   rm gosu.asc
 
 ENV PATH=/opt/bitnami/nami/bin:$PATH
-ENV BITNAMI_IMAGE_VERSION=rhel7
+ENV BITNAMI_IMAGE_VERSION=7-r0
 
 ENTRYPOINT ["/entrypoint.sh"]

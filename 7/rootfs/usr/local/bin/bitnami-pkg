@@ -36,11 +36,11 @@ print_usage() {
 }
 
 identify_distro() {
-  distro="unknown"
-  if [ -f /etc/os-release ]; then
-    distro="$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)-$(grep "^VERSION_ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2 | cut -d'.' -f1)"
-  fi
-  echo "$distro"
+    distro="${IMAGE_OS:-unknown}"
+    if [ "${distro}" == "unknown" -a -f /etc/os-release ]; then
+        distro="$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)-$(grep "^VERSION_ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2 | cut -d'.' -f1)"
+    fi
+    echo "$distro"
 }
 
 identify_arch() {
