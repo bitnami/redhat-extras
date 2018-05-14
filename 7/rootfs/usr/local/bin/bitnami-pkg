@@ -45,6 +45,9 @@ identify_distro() {
 
 identify_arch() {
   case $(arch) in
+  x86_64)
+    arch=x86_64
+    ;;
   ppc64le)
     arch=ppc64le
     ;;
