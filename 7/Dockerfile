@@ -6,7 +6,7 @@ ENV IMAGE_OS=rhel-7
 
 COPY rootfs /
 
-RUN install_packages gcc-c++ pkgconfig unzip git curl ca-certificates sudo procps-ng libaio-devel && \
+RUN install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
     useradd -ms /bin/bash bitnami && \
     mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
     sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
@@ -50,6 +50,6 @@ RUN cd /tmp && \
   rm gosu.asc
 
 ENV PATH=/opt/bitnami/nami/bin:$PATH
-ENV BITNAMI_IMAGE_VERSION=7-r0
+ENV BITNAMI_IMAGE_VERSION=7-r1
 
 ENTRYPOINT ["/entrypoint.sh"]
