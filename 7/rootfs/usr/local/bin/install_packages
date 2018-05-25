@@ -5,7 +5,7 @@ n=0
 max=2
 until [ $n -gt $max ]; do
     set +e
-    yum install --disablerepo=rhel-7-server-htb-rpms -y "$@"
+    yum install -y "$@"
     CODE=$?
     set -e
     if [ $CODE -eq 0 ]; then
