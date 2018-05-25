@@ -4,7 +4,14 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV IMAGE_OS=rhel-7
 
-COPY rootfs /
+COPY rootfs/entrypoint.sh /entrypoint.sh
+COPY rootfs/licenses/licenses.txt /licenses/licenses.txt
+COPY rootfs/opt/bitnami/base/functions /opt/bitnami/base/functions
+COPY rootfs/opt/bitnami/base/helpers /opt/bitnami/base/helpers
+COPY rootfs/opt/bitnami/updates-ca-cert.pem /opt/bitnami/updates-ca-cert.pem
+COPY rootfs/usr/local/bin/bitnami-pkg /usr/local/bin/bitnami-pkg
+COPY rootfs/usr/local/bin/install_packages /usr/local/bin/install_packages
+COPY rootfs/usr/local/bin/print-help /usr/local/bin/print-help
 
 RUN install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
     useradd -ms /bin/bash bitnami && \
