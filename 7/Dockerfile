@@ -6,7 +6,8 @@ ENV IMAGE_OS=rhel-7
 
 COPY rootfs /
 
-RUN install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
+RUN chmod 0755 / /usr /usr/local /usr/local/bin /opt && \
+    install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
     useradd -ms /bin/bash bitnami && \
     mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
     sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
@@ -15,7 +16,7 @@ RUN install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel &
 # The following security actions are recommended by some security scans.
 # https://console.bluemix.net/docs/services/va/va_index.html
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
-    sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    1/' /etc/login.defs 
+    sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    1/' /etc/login.defs
 
 ENV NAMI_VERSION=0.0.8-0
 
