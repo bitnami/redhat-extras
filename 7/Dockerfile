@@ -4,16 +4,10 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV IMAGE_OS=rhel-7
 
-COPY rootfs/entrypoint.sh /entrypoint.sh
-COPY rootfs/licenses/licenses.txt /licenses/licenses.txt
-COPY rootfs/opt/bitnami/base/functions /opt/bitnami/base/functions
-COPY rootfs/opt/bitnami/base/helpers /opt/bitnami/base/helpers
-COPY rootfs/opt/bitnami/updates-ca-cert.pem /opt/bitnami/updates-ca-cert.pem
-COPY rootfs/usr/local/bin/bitnami-pkg /usr/local/bin/bitnami-pkg
-COPY rootfs/usr/local/bin/install_packages /usr/local/bin/install_packages
-COPY rootfs/usr/local/bin/print-help /usr/local/bin/print-help
+COPY rootfs /
 
-RUN install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
+RUN chmod 0755 /usr /usr/local /usr/local/bin /opt && \
+    install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
     useradd -ms /bin/bash bitnami && \
     mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
     sed -i -e 's/\s*Defaults\s*secure_path\s*=/# Defaults secure_path=/' /etc/sudoers && \
