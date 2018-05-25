@@ -6,7 +6,7 @@ ENV IMAGE_OS=rhel-7
 
 COPY rootfs /
 
-RUN chmod 0755 /usr /usr/local /usr/local/bin /opt && \
+RUN chmod 0755 / /usr /usr/local /usr/local/bin /opt && \
     install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
     useradd -ms /bin/bash bitnami && \
     mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
