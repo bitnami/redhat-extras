@@ -36,24 +36,38 @@ print_usage() {
 }
 
 identify_distro() {
-    distro="${IMAGE_OS:-unknown}"
-    if [ "${distro}" == "unknown" -a -f /etc/os-release ]; then
-        distro="$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)-$(grep "^VERSION_ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2 | cut -d'.' -f1)"
-    fi
-    echo "$distro"
+  distro="${IMAGE_OS:-unknown}"
+  if [ "${distro}" == "unknown" -a -f /etc/os-release ]; then
+    distro="$(grep "^ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)-$(grep "^VERSION_ID=" /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2 | cut -d'.' -f1)"
+  fi
+  echo "$distro"
 }
 
 identify_arch() {
-  case $(arch) in
-  x86_64)
-    arch=x86_64
-    ;;
+  local arch=$(arch)
+
+  case "${arch}" in
   ppc64le)
-    arch=ppc64le
+    ;; # no-op
+  x86_64)
+    case $(identify_distro) in
+    debian-8)
+      arch=x64 # legacy naming
+      ;;
+    debian-*)
+      arch=amd64
+      ;;
+    ol-*)
+      arch=x86_64
+      ;;
+    rhel-*)
+      arch=x86_64
+      ;;
+    esac
     ;;
   *)
-   arch="unknown"
-   ;;
+    arch="unknown"
+    ;;
   esac
   echo $arch
 }
