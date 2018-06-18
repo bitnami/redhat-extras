@@ -7,6 +7,7 @@ ENV IMAGE_OS=rhel-7
 COPY rootfs /
 
 RUN chmod 0755 / /usr /usr/local /usr/local/bin /opt && \
+    yum upgrade -y && \
     install_packages tar gzip curl ca-certificates sudo procps-ng libaio-devel && \
     useradd -ms /bin/bash bitnami && \
     mkdir -p /opt/bitnami && chown bitnami:bitnami /opt/bitnami && \
@@ -51,6 +52,6 @@ RUN cd /tmp && \
   rm gosu.asc
 
 ENV PATH=/opt/bitnami/nami/bin:$PATH
-ENV BITNAMI_IMAGE_VERSION=7-r4
+ENV BITNAMI_IMAGE_VERSION=7-r5
 
 ENTRYPOINT ["/entrypoint.sh"]
