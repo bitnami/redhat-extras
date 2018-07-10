@@ -170,7 +170,13 @@ if [ "$PACKAGE_SHA256" ]; then
   echo "$PACKAGE_SHA256  $PACKAGE.tar.gz" | sha256sum -c -
 fi
 
-bsdtar -xf $PACKAGE.tar.gz
+PATH_TO_BSDTAR=$(which bsdtar)
+if [ -x "$PATH_TO_BSDTAR" ]; then
+  bsdtar -xf $PACKAGE.tar.gz
+else
+  tar xzf $PACKAGE.tar.gz
+fi
+
 case "$1" in
   install) info "Installing $PACKAGE" ;;
   unpack) info "Unpacking $PACKAGE" ;;
