@@ -170,7 +170,16 @@ if [ "$PACKAGE_SHA256" ]; then
   echo "$PACKAGE_SHA256  $PACKAGE.tar.gz" | sha256sum -c -
 fi
 
-tar xzf $PACKAGE.tar.gz
+# If the tarball has too many files, it can trigger a bug
+# in overlayfs when using tar. Install bsdtar in the container image
+# to workaround it. As the overhead is too big (~40 MB), it is not added by 
+# default. Source: https://github.com/coreos/bugs/issues/1095
+if which bsdtar > /dev/null; then
+  bsdtar -xf $PACKAGE.tar.gz
+else
+  tar xzf $PACKAGE.tar.gz
+fi
+
 case "$1" in
   install) info "Installing $PACKAGE" ;;
   unpack) info "Unpacking $PACKAGE" ;;
