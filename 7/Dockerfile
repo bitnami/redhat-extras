@@ -19,11 +19,11 @@ RUN chmod 0755 / /usr /usr/local /usr/local/bin /opt && \
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    1/' /etc/login.defs
 
-ENV NAMI_VERSION=0.0.8-0
+ENV NAMI_VERSION=0.0.9-0
 
 RUN cd /tmp && \
     curl -sSLO https://nami-prod.s3.amazonaws.com/tools/nami/releases/nami-$NAMI_VERSION-linux-x64.tar.gz && \
-    echo "62dcdabc99cb31e1387bdbb8bdb13aa14b47e004bd699a1d681ff305b234c15b  nami-$NAMI_VERSION-linux-x64.tar.gz" | sha256sum -c - && \
+    echo "46e7c8074ef9f61851160713cadcfbe77d4d6a47d58d2b2248d92348d2411994  nami-$NAMI_VERSION-linux-x64.tar.gz" | sha256sum -c - && \
     mkdir -p /opt/bitnami/nami && \
     tar xzf nami-$NAMI_VERSION-linux-x64.tar.gz --strip 1 -C /opt/bitnami/nami && \
     rm nami-$NAMI_VERSION-linux-x64.tar.gz
