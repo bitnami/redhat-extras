@@ -1,6 +1,17 @@
 FROM registry.access.redhat.com/rhel7
 
-LABEL maintainer "Bitnami <containers@bitnami.com>"
+LABEL maintainer="Bitnami <containers@bitnami.com>" \
+      name="RHEL Extras" \
+      version="7.x" \
+      release="4" \
+      io.k8s.display-name="RHEL Extras 7.x" \
+      vendor="Bitnami" \
+      summary="Bitnami RedHat Enterprise Linux base image with extras." \
+      usage="This image is a generic image for Bitnami containers." \
+      description="Bitnami RedHat Enterprise Linux base image with extras." \
+      io.k8s.description="Bitnami RedHat Enterprise Linux base image with extras." \
+      architecture="x86_64"
+
 
 ENV IMAGE_OS=rhel-7
 
