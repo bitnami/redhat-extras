@@ -19,7 +19,7 @@ RUN chmod 0755 / /usr /usr/local /usr/local/bin /opt && \
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    1/' /etc/login.defs
 
-ENV NAMI_VERSION=0.0.9-0
+ENV NAMI_VERSION=1.0.0-1
 
 RUN cd /tmp && \
     curl -sSLO https://nami-prod.s3.amazonaws.com/tools/nami/releases/nami-$NAMI_VERSION-linux-x64.tar.gz && \
