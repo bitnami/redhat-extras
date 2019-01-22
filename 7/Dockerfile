@@ -39,7 +39,7 @@ RUN cd /tmp && \
     tar xzf nami-$NAMI_VERSION-linux-x64.tar.gz --strip 1 -C /opt/bitnami/nami && \
     rm nami-$NAMI_VERSION-linux-x64.tar.gz
 
-ENV GPG_KEY_SERVERS_LIST ha.pool.sks-keyservers.net \
+ENV GPG_KEY_SERVERS_LIST=ha.pool.sks-keyservers.net \
                          hkp://p80.pool.sks-keyservers.net:80 \
                          keyserver.ubuntu.com \
                          hkp://keyserver.ubuntu.com:80 \
