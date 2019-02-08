@@ -12,7 +12,6 @@ LABEL maintainer="Bitnami <containers@bitnami.com>" \
       io.k8s.description="Bitnami RedHat Enterprise Linux base image with extras." \
       architecture="x86_64"
 
-
 ENV IMAGE_OS=rhel-7
 
 COPY rootfs /
@@ -39,11 +38,7 @@ RUN cd /tmp && \
     tar xzf nami-$NAMI_VERSION-linux-x64.tar.gz --strip 1 -C /opt/bitnami/nami && \
     rm nami-$NAMI_VERSION-linux-x64.tar.gz
 
-ENV GPG_KEY_SERVERS_LIST ha.pool.sks-keyservers.net \
-                         hkp://p80.pool.sks-keyservers.net:80 \
-                         keyserver.ubuntu.com \
-                         hkp://keyserver.ubuntu.com:80 \
-                         pgp.mit.edu
+ENV GPG_KEY_SERVERS_LIST="ha.pool.sks-keyservers.net hkp://p80.pool.sks-keyservers.net:80 keyserver.ubuntu.com hkp://keyserver.ubuntu.com:80 pgp.mit.edu"
 
 ENV TINI_VERSION=v0.13.2 \
     TINI_GPG_KEY=595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7
@@ -77,6 +72,6 @@ RUN cd /tmp && \
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 ENV PATH=/opt/bitnami/nami/bin:$PATH
-ENV BITNAMI_IMAGE_VERSION=7-r252
+ENV BITNAMI_IMAGE_VERSION=7-r253
 
 ENTRYPOINT ["/entrypoint.sh"]
