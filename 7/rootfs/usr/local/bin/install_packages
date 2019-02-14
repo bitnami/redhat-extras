@@ -1,6 +1,9 @@
 #!/bin/sh
-set -e
-set -u
+set -eu
+
+# Avoid yum ignoring missing packages
+alias yum="yum --setopt=skip_missing_names_on_install=False"
+
 n=0
 max=2
 until [ $n -gt $max ]; do
