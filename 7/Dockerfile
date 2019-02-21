@@ -72,6 +72,6 @@ RUN cd /tmp && \
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 ENV PATH=/opt/bitnami/nami/bin:$PATH
-ENV BITNAMI_IMAGE_VERSION=7-r267
+ENV BITNAMI_IMAGE_VERSION=7-r268
 
 ENTRYPOINT ["/entrypoint.sh"]
